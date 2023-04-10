@@ -165,7 +165,8 @@
       </div>
       <div class="content-bar">
         <div class="d-flex mb-3">
-          <img :src="server_url + '/api/' + avatar_url" alt="" width="75" height="75" class="rounded-circle me-2 object-fit-cover">
+          <img :src="server_url + '/api/' + avatar_url" alt="" width="75" height="75" class="rounded-circle me-2 object-fit-cover pointer"
+          @click="goToUser">
           <!-- avatar -->
           <div class="ms-2 d-flex flex-column justify-content-center">
             <strong class="pointer" @click="goToUser">{{ post.name }}</strong> <!-- name -->

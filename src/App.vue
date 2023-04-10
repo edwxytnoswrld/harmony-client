@@ -1,13 +1,6 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router'
 
-  console.log(import.meta.env.VITE_APP_SERVER_URL)
-  // TODO: add this ^ to every url in client requests
-
-  // TODO: add comments around the code
-  // TODO: finish documentation
-  // TODO: deploy frontend on github pages (don't forget to change the .env)
-  // TODO: change the uhh security configuration to allow github pages url
 </script>
 
 <template>

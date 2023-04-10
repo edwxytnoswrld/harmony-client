@@ -120,7 +120,8 @@
 <template>
   <div class="wrapper ms-5 mt-4 mb-4 bg-light" id="publication-preview-wrapper">
     <div class="d-flex mb-3">
-      <img :src="server_url + '/api/' + avatar_url" alt="" width="75" height="75" class="rounded-circle me-2 object-fit-cover">
+      <img :src="server_url + '/api/' + avatar_url" alt="" width="75" height="75" class="rounded-circle me-2 object-fit-cover pointer"
+      @click="goToUser">
       <div class="ms-2 d-flex flex-column justify-content-center">
         <strong class="pointer" @click="goToUser">{{ post.name }}</strong> <!-- name -->
         <div class="align-items-center pointer" @click="goToUser">@{{ post.username }}</div> <!-- username -->
@@ -160,8 +161,8 @@
     </div>
     <canvas ref="canvas" :id='"canvas" + props.post.id' class="d-none" />
     <div class="d-flex align-items-center mt-2" v-if="post.mp3Url || post.pdfUrl || post.midiUrl">
-      <i class="bi bi-download me-3 align-middle" style="font-size: 1.5rem;"></i>
-      <span class="align-middle" style="line-height: 1.5rem;">Pieejamas lejupielādes</span>
+      <i class="bi bi-download me-3 align-middle pointer" style="font-size: 1.5rem;" @click="goToPost"></i>
+      <span class="align-middle pointer" style="line-height: 1.5rem;" @click="goToPost">Pieejamas lejupielādes</span>
     </div>
     <div class="d-flex align-items-center mt-3">
       <div class="d-flex align-items-center me-4">

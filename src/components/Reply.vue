@@ -30,6 +30,10 @@
     isLiked()
   })
 
+  function goToUser() {
+      router.push({path: '/user/' + props.reply.userId})
+  }
+
   function isLiked() {
     let userId = VueJwtDecode.decode(token.value).userId
 
@@ -83,11 +87,11 @@
 <template>
   <div class="reply">
     <div class="d-flex mb-3">
-      <img :src="server_url + '/api/' + avatar_url" alt="" width="75" height="75" class="rounded-circle me-2 object-fit-cover">
-      <!-- avatar -->
+      <img :src="server_url + '/api/' + avatar_url" alt="" width="75" height="75" class="rounded-circle me-2 object-fit-cover pointer"
+      @click="goToUser">
       <div class="ms-2 d-flex flex-column justify-content-center">
-        <strong>{{ reply.name }}</strong> <!-- name -->
-        <div class="align-items-center">@{{ reply.username }}</div> <!-- username -->
+        <strong class="pointer" @click="goToUser">{{ reply.name }}</strong> <!-- name -->
+        <div class="align-items-center pointer" @click="goToUser">@{{ reply.username }}</div> <!-- username -->
       </div>
       <div class="ms-auto">{{ reply.createdDate }}</div> <!-- date -->
     </div>

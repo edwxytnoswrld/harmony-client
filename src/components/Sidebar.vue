@@ -45,6 +45,10 @@
     router.go(0)
   }
 
+  function goToUser() {
+      router.push({path: '/user/' + VueJwtDecode.decode(token.value).userId})
+  }
+
 </script>
 
 <template>
@@ -55,10 +59,14 @@
     <hr>
     <div class="dropdown">
       <div class="d-flex align-items-center"  aria-expanded="false">
-        <img :src="server_url + '/api/' + avatar_url" alt="" width="100" height="100" class="rounded-circle me-2 object-fit-cover">
+        <img v-if="!token" :src="server_url + '/api/' + avatar_url" alt="" width="100" height="100"
+           class="rounded-circle me-2 object-fit-cover">
+        <img v-else :src="server_url + '/api/' + avatar_url" alt="" width="100" height="100"
+           class="rounded-circle me-2 object-fit-cover pointer" @click="goToUser">
         <div class="ms-1 align-middle">
-          <strong>{{ name }}</strong> <br/>
-          <span v-if="token">@{{ username }}</span>
+          <strong v-if="!token">{{ name }}</strong>
+          <strong v-else class="pointer" @click="goToUser">{{ name }}</strong> <br/>
+          <span v-if="token" class="pointer" @click="goToUser">@{{ username }}</span>
         </div>
       </div>
     </div>
@@ -84,8 +92,8 @@
       </li>
     </ul>
     <div class="text-center" v-else>
-      <RouterLink to="/login" class="nav-link link-dark m-0 p-0 d-inline-block">Ielogojieties</RouterLink><span>, lai izmantotu pilno tīmekļa vietni,<br/></span>
-      <span>vai </span><RouterLink to="/register" class="nav-link link-dark m-0 p-0 d-inline-block">izveidojiet jauno kontu</RouterLink>!
+      <RouterLink to="/login" class="nav-link link-primary m-0 p-0 d-inline-block">Ielogojieties</RouterLink><span>, lai izmantotu pilno tīmekļa vietni,<br/></span>
+      <span>vai </span><RouterLink to="/register" class="nav-link link-primary m-0 p-0 d-inline-block">izveidojiet jauno kontu</RouterLink>!
     </div>
 
   </div>
