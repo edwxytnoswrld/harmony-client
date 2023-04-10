@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Sidebar from "@/components/Sidebar.vue";
 
 const router = createRouter({
-  history: createWebHistory('/harmony-client/'),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
