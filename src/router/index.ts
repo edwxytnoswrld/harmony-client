@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Sidebar from "@/components/Sidebar.vue";
 
+// Responsible for routing
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

@@ -27,6 +27,7 @@
   }
 
   async function updateData() {
+    // Update the avatar if it's uploaded
     if (image.value != null) {
       const formData = new FormData();
       formData.append('avatar', image.value)
@@ -52,26 +53,29 @@
     if (username.value != null) formData.append('username', username.value)
     if (password.value != null) formData.append('name', password.value)
 
+    // If there's anything changed besides the avatar, request server to update the data
     if (Array.from(formData.keys()).length > 0) {
-      formData.append("userId", decoded.userId) // actually, why? we can already authorize
+      formData.append("userId", decoded.userId)
       axios.post(server_url + "/api/users/update-data", formData, config)
           .then(async function (response) {
-            //handle success
+            // Handle success
             await console.log(response);
 
+            // Name/email/username/password are stored in the token. Once they are updated,
+            // token contains outdated data, therefore we need to log in again to update the token
             cookies.remove("token")
             await router.push({name: 'home'})
             await router.go(0)
           })
           .catch(function (response) {
-            //handle error
+            // Handle error
             console.log(response);
           });
-  }
-
+    }
   }
 
   function onFileChange(e) {
+    // Handle file addition
     var files = e.target.files || e.dataTransfer.files;
     if (!files.length)
       return;

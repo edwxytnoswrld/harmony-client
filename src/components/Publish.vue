@@ -15,6 +15,7 @@
   const pdfFile = ref(null)
 
   function onFileChange(e: { target: { files: any; }; dataTransfer: { files: any; }; }) {
+    // Handle file addition
     var files = e.target.files || e.dataTransfer.files;
     if(!files.length)
       return;
@@ -33,11 +34,14 @@
     const token = ref(cookies.get("token"))
     if (token.value != null) {
       let decoded = VueJwtDecode.decode(token.value)
-      formData.append("userId", decoded.userId) // actually, why? we can already authorize
+      // Add all data to formdata which is sent to server
+      formData.append("userId", decoded.userId)
       formData.append('content', content.value)
       formData.append("audioFile", audioFile.value)
       formData.append("midiFile", midiFile.value)
       formData.append("pdfFile", pdfFile.value)
+
+      // Send null songMetadata if it's empty
       if(songMetadata.value != "") {
         formData.append("songMetadata", songMetadata.value)
       } else {
@@ -50,16 +54,14 @@
       }
       axios.post(server_url + "/api/posts/publish", formData, config)
           .then(async function (response) {
-            //handle success
+            // Handle success
             console.log(response.data);
             await router.push('/publication/' + response.data)
           })
           .catch(function (response) {
-            //handle error
+            // Handle error
             console.log(response);
           });
-    } else {
-      // error handling
     }
   }
 </script>
@@ -130,9 +132,6 @@
 
 <style>
 #wrapper {
-  /*border: 1px solid #ddd;*/
-  /*height: 100%;*/
-  /*max-height:100%;*/
   width: 80%;
   border: 1px solid #ddd;
   border-radius: 15px;
@@ -140,7 +139,6 @@
   height: -webkit-fill-available;
   max-height: 100vh;
   overflow-x: auto;
-  /* overflow-y: scroll; */
 }
 
 .bottom-bar {

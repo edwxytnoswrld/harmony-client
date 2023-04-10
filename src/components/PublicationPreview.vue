@@ -13,7 +13,6 @@
   const avatar_url = ref("user-photos/0/default.png")
   const server_url = import.meta.env.VITE_APP_SERVER_URL
 
-
   const liked = ref(false)
 
   const player = ref(null)

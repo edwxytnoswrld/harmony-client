@@ -4,17 +4,21 @@
   import { useCookies } from "vue3-cookies";
   import router from "@/router";
 
+  // User token is stored in cookies
   const { cookies } = useCookies();
+
   const server_url = import.meta.env.VITE_APP_SERVER_URL
 
   const username = ref("")
   const password = ref("")
 
+  // If login fails, user will not be redirected further
   const fail = ref(false)
 
   onMounted(() => {
         'use strict'
         var forms = document.getElementsByClassName('needs-validation');
+        // Validate the form
         var validation = Array.prototype.filter.call(forms, function (form) {
           form.addEventListener('submit', function (event) {
             if (form.checkValidity() === false) {
@@ -38,9 +42,11 @@
 
     axios.post(server_url + "/api/authenticate", formData)
         .then(async function (response) {
-          //handle success
+          // Handle success
           console.log(response.data.token);
+          // Set user token
           cookies.set("token", response.data.token)
+          // Redirect to main page
           if (router.currentRoute.value.name == "login") {
             await router.push({name: 'home'})
             router.go(0)
@@ -50,7 +56,7 @@
           }
         })
         .catch(function (response) {
-          //handle error
+          /// If login fails, user will not be redirected further
           fail.value = true
           var forms = document.getElementsByClassName('was-validated');
           forms[0].classList.remove('was-validated')
@@ -106,25 +112,26 @@
 </template>
 
 <style>
-.bi {
-  width: 1em;
-  height: 1.35em;
-}
-#login-wrapper {
-  padding: 20px 30px;
-  border-radius: 15px;
-  border: 1px solid #ddd;
-  width: 40%;
-  display: block;
-  max-height: 80vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-}
+  .bi {
+    width: 1em;
+    height: 1.35em;
+  }
 
-.card-body, .card-footer {
-  padding: 20px 30px;
-}
+  #login-wrapper {
+    padding: 20px 30px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    width: 40%;
+    display: block;
+    max-height: 80vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  .card-body, .card-footer {
+    padding: 20px 30px;
+  }
 </style>

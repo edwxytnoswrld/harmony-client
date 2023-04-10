@@ -5,10 +5,10 @@
 
   const server_url = import.meta.env.VITE_APP_SERVER_URL
 
-
   onMounted(() => {
       'use strict'
       var forms = document.getElementsByClassName('needs-validation');
+      // Validate the form
       var validation = Array.prototype.filter.call(forms, function (form) {
         form.addEventListener('submit', function (event) {
           if (form.checkValidity() === false) {
@@ -21,7 +21,7 @@
           form.classList.add('was-validated');
         }, false)
       })
-  }
+    }
   )
 
   const name = ref("")
@@ -38,12 +38,12 @@
 
     axios.post(server_url + "/api/register", formData)
         .then(function (response) {
-          //handle success
+          // Handle success
           console.log(response);
           router.push({name: "login"})
         })
         .catch(function (response) {
-          //handle error
+          // Handle error
           console.log(response);
         });
 
@@ -107,25 +107,25 @@
 </template>
 
 <style>
-.bi {
-  width: 1em;
-  height: 1.35em;
-}
-#login-wrapper {
-  padding: 20px 30px;
-  border-radius: 15px;
-  border: 1px solid #ddd;
-  width: 40%;
-  display: block;
-  max-height: 80vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-}
+  .bi {
+    width: 1em;
+    height: 1.35em;
+  }
+  #login-wrapper {
+    padding: 20px 30px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    width: 40%;
+    display: block;
+    max-height: 80vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
 
-.card-body, .card-footer {
-  padding: 20px 30px;
-}
+  .card-body, .card-footer {
+    padding: 20px 30px;
+  }
 </style>

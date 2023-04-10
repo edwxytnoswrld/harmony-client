@@ -21,7 +21,6 @@
     }
   }
 
-  console.log(props.reply)
   if(props.reply.avatarUrl != null) {
     avatar_url.value = props.reply.avatarUrl
   }

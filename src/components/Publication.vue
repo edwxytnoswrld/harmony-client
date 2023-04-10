@@ -17,9 +17,12 @@
   const avatar_url = ref("user-photos/0/default.png")
   const liked = ref(false)
 
+  // Audio elements
   const player = ref(null)
   const plyr = ref(null)
   const canvas = ref(null)
+
+  // Audio visualizaton element
   useAVLine(player, canvas, { src: server_url + '/api/' + post.value.mp3Url, lineColor: "#00b3ff"})
 
   const replies = ref([])
@@ -31,18 +34,21 @@
     }
   }
 
+  // Make visualization appear when audio is played
   function updatePlaying() {
     let el = document.getElementById('canvas' + post.value.id)
     el.classList.add('d-block')
     el.classList.remove('d-none')
   }
 
+  // Make visualization disappear when audio is not played
   function stopPlaying() {
     let el = document.getElementById('canvas' + post.value.id)
     el.classList.add('d-none')
     el.classList.remove('d-block')
   }
 
+  // Handle audio player event
   onUpdated(() => {
       let el = document.getElementById('plyrplay' + props.postId)
       if(el != null) {
@@ -107,7 +113,6 @@
         });
   }
 
-
   function getReplies() {
     axios.get(server_url + "/api/replies/get-all?postId=" + props.postId, config)
         .then(function (response) {
@@ -120,6 +125,7 @@
         });
   }
 
+  // Get the post data before rendering the page
   onBeforeMount(() => {
     axios.get(server_url + "/api/posts/get-by-id?postId=" + props.postId, config)
         .then(function (response) {
@@ -243,54 +249,54 @@
 </template>
 
 <style>
-#wrapper {
-  /*border: 1px solid #ddd;*/
-  /*height: 100%;*/
-  /*max-height:100%;*/
-  width: 80%;
-  border: 1px solid #ddd;
-  border-radius: 15px;
-  height: 100vh;
-  height: -webkit-fill-available;
-  max-height: 100vh;
-  overflow-x: auto;
-  overflow-y: scroll;
-}
+  #wrapper {
+    /*border: 1px solid #ddd;*/
+    /*height: 100%;*/
+    /*max-height:100%;*/
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: scroll;
+  }
 
-.content-bar {
-  padding: 20px 30px;
-  border: solid #ddd;
-  border-width: 1px 0px 0px 0px;
-}
+  .content-bar {
+    padding: 20px 30px;
+    border: solid #ddd;
+    border-width: 1px 0px 0px 0px;
+  }
 
-.write-bar {
-  padding: 20px 30px;
-  border: solid #ddd;
-  border-width: 1px 0px 1px 0px;
-}
+  .write-bar {
+    padding: 20px 30px;
+    border: solid #ddd;
+    border-width: 1px 0px 1px 0px;
+  }
 
-.top-bar {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 100%;
-}
+  .top-bar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+  }
 
-.plyr--audio .plyr__controls {
-  background: var(--bs-body-bg) !important;
-  --bs-bg-opacity: 1 !important;
-  color: var(--bs-body-color) !important;
-  border-radius: 10px !important;
-}
+  .plyr--audio .plyr__controls {
+    background: var(--bs-body-bg) !important;
+    --bs-bg-opacity: 1 !important;
+    color: var(--bs-body-color) !important;
+    border-radius: 10px !important;
+  }
 
-.plyr--audio { 
-  padding: 5px 0px 5px 0px !important;
-  margin: 10px 0px 0px 0px !important;
-  /* width: 50%; */
-}
+  .plyr--audio {
+    padding: 5px 0px 5px 0px !important;
+    margin: 10px 0px 0px 0px !important;
+    /* width: 50%; */
+  }
 
-.accordion-button:focus {
-  box-shadow: none;
-  border-color: rgba(0,0,0,.125);
-}
+  .accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+  }
 </style>
 

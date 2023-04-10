@@ -35,6 +35,9 @@
           if (user.value.avatarUrl != null) {
             avatar_url.value = user.value.avatarUrl
           }
+          location.value = user.value.location
+          biography.value = user.value.biography
+          title.value = user.value.title
           console.log(response.data)
           console.log(user.value);
         })
@@ -105,7 +108,9 @@
           </div> <!-- date -->
         </div>
         <p class="m-0" v-if="!takeInput">{{ user.biography }}</p> <!-- message-content -->
-        <div class="m-0" v-if="takeInput"><textarea v-model="biography" class="form-control w-75" name="nya" id="" rows="3" placeholder="Biography"></textarea></div> <!-- message-content -->
+        <div class="m-0" v-if="takeInput">
+            <textarea v-model="biography" class="form-control w-75" name="nya" id="" rows="3" placeholder="Biography"></textarea>
+        </div> <!-- message-content -->
         <div class="d-flex align-items-center mt-3">
           <div  class="d-flex align-items-center me-4">
             <i v-if="user.location || takeInput" class="bi bi-geo-alt me-3 align-middle" style="font-size: 1.5rem;"></i>

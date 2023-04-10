@@ -88,7 +88,7 @@
         </RouterLink>
       </li>
       <li>
-        <div class="ms-3 d-inline-block p-0 pointer" @click="logout">Izrakstīties</div>
+        <div class="ms-3 d-inline-block p-0 pointer nav-link link-danger" @click="logout">Izrakstīties</div>
       </li>
     </ul>
     <div class="text-center" v-else>

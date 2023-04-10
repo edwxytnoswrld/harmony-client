@@ -1,26 +1,17 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router'
-
 </script>
 
 <template>
     <main class="d-flex flex-nowrap">
-
       <RouterView name="sidebar" />
       <RouterView name="main"/>
-<!--      <nav>-->
-<!--        <RouterLink to="/">Home</RouterLink>-->
-<!--        <RouterLink to="/about">About</RouterLink>-->
-<!--      </nav>-->
     </main>
-
-<!--  <RouterView />-->
 </template>
 
 <style scoped>
 body {
   min-height: 100vh;
-  /*min-height: -webkit-fill-available;*/
 }
 
 html {
@@ -31,10 +22,8 @@ html {
 main {
   height: 100vh;
   width: 100%;
-  /*height: -webkit-fill-available;*/
   max-height: 100vh;
   overflow-x: auto;
-  /* overflow-y: scroll; */
 }
 
 .scrollarea {

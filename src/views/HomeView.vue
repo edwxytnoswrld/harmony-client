@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import PublicationPreview from "@/components/PublicationPreview.vue";
   import { useCookies } from "vue3-cookies";
   import {ref} from "vue";
   import Login from "@/components/Login.vue";
@@ -12,6 +11,7 @@
 
 <template>
   <main>
+    <!-- Change main component to login if user is not logged in -->
     <Login v-if="!isLoggedIn"/>
     <TimelineView v-else/>
   </main>
